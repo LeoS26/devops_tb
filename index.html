@@ -1,10 +1,523 @@
 <!DOCTYPE html>
-<header>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperCars - Carros Superesportivos</title>
 
-</header>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #080808;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Cabeçalho */
+        header {
+            min-height: 100vh;
+            background:
+                linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.85)),
+                url("https://images.unsplash.com/photo-1503736334956-4c8f8e92946d")
+                center/cover no-repeat;
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        nav {
+            width: 90%;
+            margin: 0 auto;
+            padding: 25px 0;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #e50914;
+            letter-spacing: 2px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #e50914;
+        }
+
+        .hero {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 8vw, 90px);
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #e50914;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #ddd;
+            margin-bottom: 35px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            background: #e50914;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #b0060f;
+            transform: scale(1.05);
+        }
+
+        /* Seções */
+        section {
+            padding: 80px 8%;
+        }
+
+        .titulo {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .titulo h2 {
+            font-size: 40px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .titulo p {
+            color: #aaa;
+        }
+
+        /* Carros */
+        .carros {
+            background: #101010;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: #181818;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(229,9,20,0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .card h3 {
+            font-size: 25px;
+            margin-bottom: 10px;
+            color: #e50914;
+        }
+
+        .card p {
+            color: #bbb;
+            margin-bottom: 20px;
+        }
+
+        .specs {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #333;
+            padding-top: 15px;
+        }
+
+        .specs div {
+            text-align: center;
+        }
+
+        .specs strong {
+            display: block;
+            color: white;
+            font-size: 18px;
+        }
+
+        .specs small {
+            color: #888;
+        }
+
+        /* Características */
+        .caracteristicas {
+            background: #080808;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .feature {
+            padding: 30px;
+            text-align: center;
+            background: #121212;
+            border: 1px solid #222;
+            border-radius: 10px;
+        }
+
+        .feature .icone {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            margin-bottom: 10px;
+            color: #e50914;
+        }
+
+        .feature p {
+            color: #aaa;
+        }
+
+        /* Banner */
+        .banner {
+            background:
+                linear-gradient(90deg, rgba(0,0,0,.9), rgba(0,0,0,.4)),
+                url("https://images.unsplash.com/photo-1544636331-e26879cd4d9b")
+                center/cover no-repeat;
+
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+        }
+
+        .banner-content {
+            max-width: 600px;
+        }
+
+        .banner h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .banner p {
+            color: #ddd;
+            margin-bottom: 25px;
+        }
+
+        /* Rodapé */
+        footer {
+            background: #050505;
+            border-top: 1px solid #222;
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        footer span {
+            color: #e50914;
+        }
+
+        /* Responsividade */
+        @media (max-width: 700px) {
+            nav {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 50px;
+            }
+
+            .hero p {
+                font-size: 17px;
+            }
+
+            section {
+                padding: 60px 5%;
+            }
+
+            .banner h2 {
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+
 <body>
-    <center>
-    <h1> Usando projeto na turma B - novo status </h1>
-    <h1> Novo conteúdo para manutenção </h1>
-  </center>
+
+    <header id="inicio">
+
+        <nav>
+            <div class="logo">SUPERCARS</div>
+
+            <ul>
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#carros">Carros</a></li>
+                <li><a href="#tecnologia">Tecnologia</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+
+        <div class="hero">
+            <div class="hero-content">
+                <h1>Velocidade <span>Extrema</span></h1>
+
+                <p>
+                    Descubra o universo dos carros superesportivos,
+                    onde potência, design e tecnologia se encontram.
+                </p>
+
+                <a href="#carros" class="btn">Explorar carros</a>
+            </div>
+        </div>
+
+    </header>
+
+    <section class="carros" id="carros">
+
+        <div class="titulo">
+            <h2>Máquinas extraordinárias</h2>
+            <p>Alguns dos modelos mais impressionantes do mundo automotivo.</p>
+        </div>
+
+        <div class="cards">
+
+            <article class="card">
+                <img
+                    src="https://images.unsplash.com/photo-1553440569-bcc63803a83d"
+                    alt="Carro esportivo vermelho">
+
+                <div class="card-content">
+                    <h3>Ferrari</h3>
+
+                    <p>
+                        Conhecida pelo design italiano, motores de alto
+                        desempenho e tradição nas pistas.
+                    </p>
+
+                    <div class="specs">
+                        <div>
+                            <strong>V8</strong>
+                            <small>Motor</small>
+                        </div>
+
+                        <div>
+                            <strong>700+</strong>
+                            <small>CV</small>
+                        </div>
+
+                        <div>
+                            <strong>330+</strong>
+                            <small>km/h</small>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+
+            <article class="card">
+                <img
+                    src="https://images.unsplash.com/photo-1542282088-fe8426682b8f"
+                    alt="Carro esportivo preto">
+
+                <div class="card-content">
+                    <h3>Lamborghini</h3>
+
+                    <p>
+                        Design agressivo, desempenho impressionante e
+                        uma identidade visual inconfundível.
+                    </p>
+
+                    <div class="specs">
+                        <div>
+                            <strong>V10</strong>
+                            <small>Motor</small>
+                        </div>
+
+                        <div>
+                            <strong>630+</strong>
+                            <small>CV</small>
+                        </div>
+
+                        <div>
+                            <strong>320+</strong>
+                            <small>km/h</small>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+
+            <article class="card">
+                <img
+                    src="https://images.unsplash.com/photo-1504215680853-026ed2a45def"
+                    alt="Superesportivo azul">
+
+                <div class="card-content">
+                    <h3>McLaren</h3>
+
+                    <p>
+                        Engenharia focada em aerodinâmica, baixo peso
+                        e performance de alto nível.
+                    </p>
+
+                    <div class="specs">
+                        <div>
+                            <strong>V8</strong>
+                            <small>Motor</small>
+                        </div>
+
+                        <div>
+                            <strong>750+</strong>
+                            <small>CV</small>
+                        </div>
+
+                        <div>
+                            <strong>340+</strong>
+                            <small>km/h</small>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+
+    <section class="caracteristicas" id="tecnologia">
+
+        <div class="titulo">
+            <h2>Tecnologia e desempenho</h2>
+            <p>O que torna um superesportivo tão especial?</p>
+        </div>
+
+        <div class="features">
+
+            <div class="feature">
+                <div class="icone">🏎️</div>
+                <h3>Alta Performance</h3>
+                <p>
+                    Motores desenvolvidos para entregar potência
+                    e aceleração impressionantes.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="icone">⚙️</div>
+                <h3>Engenharia</h3>
+                <p>
+                    Sistemas avançados de suspensão, transmissão
+                    e controle eletrônico.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="icone">💨</div>
+                <h3>Aerodinâmica</h3>
+                <p>
+                    Carroceria projetada para melhorar estabilidade
+                    e eficiência em altas velocidades.
+                </p>
+            </div>
+
+            <div class="feature">
+                <div class="icone">🔥</div>
+                <h3>Design</h3>
+                <p>
+                    Formas marcantes que combinam estética,
+                    funcionalidade e identidade.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="banner" id="contato">
+
+        <div class="banner-content">
+            <h2>O limite é a imaginação.</h2>
+
+            <p>
+                Entre no mundo dos superesportivos e conheça
+                máquinas criadas para transformar velocidade em emoção.
+            </p>
+
+            <a href="mailto:contato@supercars.com" class="btn">
+                Entre em contato
+            </a>
+        </div>
+
+    </section>
+
+
+    <footer>
+        <p>
+            © 2026 <span>SuperCars</span> — Todos os direitos reservados.
+        </p>
+    </footer>
+
 </body>
+</html>
