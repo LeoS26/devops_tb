@@ -46,6 +46,7 @@ jobs:
 
 
   Docker:
+    needs: Validar
     runs-on: ubuntu-latest
 
     steps:
