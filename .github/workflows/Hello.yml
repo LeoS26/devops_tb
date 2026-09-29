@@ -21,8 +21,9 @@ jobs:
 
       
      - name: Listando do diretorio para ver os arquivos
-       run: ls-l
+       run: ls -l
 
      - name: Deixando uma mensagem
        run: echo "Esta funcionando o CI"
+       
      
